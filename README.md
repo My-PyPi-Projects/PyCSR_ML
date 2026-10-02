@@ -4,6 +4,7 @@ PyCSR_ML turns a CSV or text file into a polished, self-contained HTML business 
 
 The report runs locally and embeds all charts directly in the HTML. No dataset is uploaded and no report server is required.
 
+
 ## Highlights
 
 - Loads `.csv` and `.txt` files with delimiter and encoding detection.
