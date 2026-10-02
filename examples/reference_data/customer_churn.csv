@@ -1,0 +1,11 @@
+age,tenure_months,monthly_spend,plan,support_calls,churn
+22,3,29.99,basic,4,yes
+44,36,89.5,premium,0,no
+35,18,55.25,standard,1,no
+29,7,39.9,basic,3,yes
+51,60,105.0,premium,0,no
+41,24,62.75,standard,2,no
+25,5,31.2,basic,5,yes
+47,48,94.1,premium,1,no
+33,14,52.3,standard,2,no
+38,10,45.0,basic,4,yes

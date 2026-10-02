@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PyCSR_ML Report — {{ source.name }}</title>
+  <style>
+    :root { --navy:#0f172a; --blue:#2563eb; --cyan:#06b6d4; --ink:#1e293b; --muted:#64748b; --line:#e2e8f0; --paper:#fff; --bg:#f1f5f9; --good:#059669; --warn:#d97706; --risk:#dc2626; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.55 Inter,Segoe UI,Arial,sans-serif; }
+    header { background:linear-gradient(120deg,#0f172a,#172554 62%,#164e63); color:#fff; padding:42px max(5vw,24px) 70px; }
+    header .brand { color:#67e8f9; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    h1 { margin:10px 0 4px; font-size:clamp(27px,4vw,46px); line-height:1.1; }
+    header p { margin:8px 0 0; color:#cbd5e1; }
+    main { width:min(1240px,92vw); margin:-36px auto 60px; }
+    section { background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:26px; margin:0 0 22px; box-shadow:0 12px 30px rgba(15,23,42,.06); }
+    h2 { margin:0 0 18px; color:var(--navy); font-size:22px; }
+    h3 { margin:22px 0 10px; color:var(--navy); }
+    .subtitle { color:var(--muted); margin-top:-12px; margin-bottom:20px; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+    .card { border:1px solid var(--line); border-radius:12px; padding:16px; background:linear-gradient(145deg,#fff,#f8fafc); }
+    .card .label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+    .card .value { color:var(--navy); font-weight:800; font-size:25px; margin-top:4px; }
+    .score { color:var(--good)!important; }
+    .meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:8px 24px; padding-top:18px; color:var(--muted); }
+    .meta strong { color:var(--ink); }
+    .findings { display:grid; gap:10px; }
+    .finding { border-left:4px solid var(--blue); padding:12px 14px; background:#f8fafc; border-radius:6px; }
+    .finding.risk { border-color:var(--risk); }.finding.warn { border-color:var(--warn); }.finding.good { border-color:var(--good); }
+    .finding strong { display:block; }
+    .chart-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:16px; }
+    .chart { border:1px solid var(--line); border-radius:12px; padding:10px; background:#fff; }
+    .chart .plotly-graph-div,.wide-chart .plotly-graph-div { width:100%!important; }
+    .wide-chart { max-width:900px; margin:auto; }
+    .stat-box { min-width:340px; }
+    .mini-boxplot { width:100%; min-height:120px; }
+    .stat-values { display:grid; grid-template-columns:repeat(5,minmax(55px,1fr)); gap:5px; margin-top:2px; color:var(--muted); font-size:10px; text-align:center; }
+    .stat-values strong { display:block; color:var(--ink); font-size:11px; }
+    .table-wrap { overflow:auto; border:1px solid var(--line); border-radius:10px; }
+    table { border-collapse:collapse; width:100%; min-width:720px; }
+    th { background:#f8fafc; color:#475569; text-align:left; font-size:12px; text-transform:uppercase; letter-spacing:.04em; position:sticky; top:0; }
+    th,td { padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+    tr:last-child td { border-bottom:0; }
+    .pill { display:inline-block; padding:3px 9px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:12px; font-weight:700; }
+    .pill.best { background:#d1fae5; color:#047857; }
+    .callout { background:#eff6ff; border:1px solid #bfdbfe; padding:16px; border-radius:10px; }
+    .skip { color:var(--muted); border:1px dashed #94a3b8; padding:20px; border-radius:10px; }
+    details { margin-top:8px; } summary { cursor:pointer; color:var(--blue); font-weight:600; }
+    footer { text-align:center; color:var(--muted); margin-top:30px; }
+    @media print { body{background:#fff} header{padding-top:20px} main{width:100%;margin:0} section{box-shadow:none;break-inside:avoid} }
+  </style>
+  {{ charts.plotly_js|safe }}
+</head>
+<body>
+<header>
+  <div class="brand">PyCSR_ML · Decision Intelligence</div>
+  <h1>{{ source.name }}</h1>
+  <p>Automated data quality, descriptive analytics, and machine-learning benchmark</p>
+</header>
+<main>
+  <section>
+    <h2>Executive overview</h2>
+    <div class="cards">
+      <div class="card"><div class="label">Rows</div><div class="value">{{ profile.rows|comma }}</div></div>
+      <div class="card"><div class="label">Columns</div><div class="value">{{ profile.columns|comma }}</div></div>
+      <div class="card"><div class="label">Missing data</div><div class="value">{{ profile.missing_pct }}%</div></div>
+      <div class="card"><div class="label">Duplicates</div><div class="value">{{ profile.duplicate_rows|comma }}</div></div>
+      <div class="card"><div class="label">Quality score</div><div class="value score">{{ profile.quality_score }}/100</div></div>
+      <div class="card"><div class="label">Memory</div><div class="value">{{ profile.memory_mb }} MB</div></div>
+    </div>
+    <div class="meta">
+      <span><strong>Source:</strong> {{ source.path }}</span><span><strong>Loaded as:</strong> {{ source.load_mode }}</span>
+      <span><strong>Encoding:</strong> {{ source.encoding }}</span><span><strong>Generated:</strong> {{ profile.generated_at }}</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Data quality findings</h2>
+    <div class="findings">
+      {% for item in profile.findings %}<div class="finding {{ item.level }}"><strong>{{ item.title }}</strong>{{ item.text }}</div>{% endfor %}
+    </div>
+    {% if charts.missing %}<h3>Missing-data concentration</h3><p class="subtitle">Hover over any bar to see its variable, missing count, and missing rate.</p><div class="wide-chart">{{ charts.missing|safe }}</div>{% endif %}
+  </section>
+
+  <section>
+    <h2>Column intelligence</h2>
+    <p class="subtitle">Types are semantic estimates in addition to the source storage dtype.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Column</th><th>Semantic type</th><th>Storage</th><th>Complete</th><th>Missing</th><th>Unique</th><th>Key statistics</th></tr></thead>
+      <tbody>{% for col in profile.column_profiles %}<tr>
+        <td><strong>{{ col.name }}</strong></td><td><span class="pill">{{ col.kind }}</span></td><td>{{ col.dtype }}</td>
+        <td>{{ col.non_null|comma }}</td><td>{{ col.missing|comma }} ({{ col.missing_pct }}%)</td><td>{{ col.unique|comma }}</td>
+        <td>{% if col.kind.startswith('numeric') %}<div class="stat-box">
+          {% if charts.boxplots.get(col.name) %}<div class="mini-boxplot">{{ charts.boxplots.get(col.name)|safe }}</div>{% endif %}
+          <div class="stat-values">
+            <span>Min<strong>{{ col.stats.min }}</strong></span><span>Q1<strong>{{ col.stats.q1 }}</strong></span><span>Median<strong>{{ col.stats.median }}</strong></span><span>Q3<strong>{{ col.stats.q3 }}</strong></span><span>Max<strong>{{ col.stats.max }}</strong></span>
+          </div><small>Mean {{ col.stats.mean }} · SD {{ col.stats.std }}</small>
+        </div>{% else %}top “{{ col.stats.top }}” ({{ col.stats.top_frequency }}), avg length {{ col.stats.avg_length }}{% endif %}</td>
+      </tr>{% endfor %}</tbody>
+    </table></div>
+  </section>
+
+  {% if charts.variables %}<section><h2>Interactive variable explorer</h2><p class="subtitle">Every variable is represented in a Seaborn-inspired style. Values are printed on the chart; hover over a colored bar or marker for the full tooltip. Use the toolbar to zoom, pan, or download an image.</p><div class="chart-grid">
+    {% for chart in charts.variables %}<div class="chart" aria-label="Distribution for {{ chart.name }}"><span class="pill">{{ chart.kind }}</span>{{ chart.html|safe }}</div>{% endfor %}
+  </div></section>{% endif %}
+
+  {% if charts.correlation %}<section><h2>Relationship analysis</h2><p class="subtitle">Hover over any cell for the exact variable pair and correlation. Pearson correlation indicates linear association, not causation.</p><div class="wide-chart">{{ charts.correlation|safe }}</div></section>{% endif %}
+
+  <section>
+    <h2>Automatic ML benchmark</h2>
+    {% if ml.status == 'complete' %}
+      <div class="cards">
+        <div class="card"><div class="label">Problem</div><div class="value" style="font-size:20px">{{ ml.problem_type|title }}</div></div>
+        <div class="card"><div class="label">Target</div><div class="value" style="font-size:20px">{{ ml.target }}</div></div>
+        <div class="card"><div class="label">Recommended</div><div class="value score" style="font-size:20px">{{ ml.best_model }}</div></div>
+        {% if ml.balance %}<div class="card"><div class="label">Target balance</div><div class="value" style="font-size:20px">{{ ml.balance.label|title }} · {{ ml.balance.ratio }}:1</div></div>{% endif %}
+      </div>
+      <p>{{ ml.target_reason|capitalize }}. {{ ml.sampling_note }} The holdout contains {{ ml.test_rows|comma }} records.</p>
+      {% if charts.models %}<div class="wide-chart">{{ charts.models|safe }}</div>{% endif %}
+      <div class="table-wrap"><table><thead><tr><th>Model</th><th>{{ ml.primary_metric }}</th><th>Additional metrics</th><th>Fit time</th></tr></thead><tbody>
+        {% for model in ml.models %}<tr><td><strong>{{ model.name }}</strong>{% if model.recommended %} <span class="pill best">Best</span>{% endif %}</td><td>{{ model.primary_score }}</td><td>{% for key,value in model.metrics.items() %}{{ key }}: {{ value }}{% if not loop.last %} · {% endif %}{% endfor %}</td><td>{{ model.seconds }} sec</td></tr>{% endfor %}
+      </tbody></table></div>
+      <h3>Business recommendation</h3><div class="callout">{{ ml.recommendation }}</div>
+      {% if ml.balance %}<details><summary>Target class distribution</summary><ul>{% for name,count,pct in ml.balance.distribution %}<li>{{ name }}: {{ count|comma }} ({{ pct }}%)</li>{% endfor %}</ul></details>{% endif %}
+      {% if ml.dropped_features %}<p><strong>Excluded identifier/constant features:</strong> {{ ml.dropped_features|join(', ') }}</p>{% endif %}
+      <p><small>{{ ml.disclaimer }}</small></p>
+    {% else %}<div class="skip"><strong>ML stage not run.</strong><br>{{ ml.reason }}</div>{% endif %}
+  </section>
+
+  <section>
+    <h2>Data preview</h2>
+    <p class="subtitle">First {{ profile.preview|length }} records; values are escaped for safe HTML rendering.</p>
+    <div class="table-wrap"><table><thead><tr>{% for name in profile.preview_columns %}<th>{{ name }}</th>{% endfor %}</tr></thead><tbody>
+      {% for row in profile.preview %}<tr>{% for name in profile.preview_columns %}<td>{{ row[name] }}</td>{% endfor %}</tr>{% endfor %}
+    </tbody></table></div>
+  </section>
+  <footer>Generated locally by PyCSR_ML · No dataset contents were uploaded</footer>
+</main>
+</body>
+</html>

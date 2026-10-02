@@ -1,0 +1,451 @@
+ticket_text,channel,customer_tier,previous_tickets,product,priority
+Customer reports login failure in the billing service; this is minor inconvenience.,phone,business,2,billing service,low
+Customer reports payment declined in the web portal; this is blocking all work.,web,enterprise,2,web portal,high
+Customer reports payment declined in the analytics dashboard; this is affecting several users.,email,business,2,analytics dashboard,high
+Customer reports data export in the billing service; this is minor inconvenience.,web,standard,3,billing service,low
+Customer reports payment declined in the billing service; this is affecting several users.,chat,business,3,billing service,high
+Customer reports payment declined in the mobile app; this is minor inconvenience.,web,business,4,mobile app,high
+Customer reports account locked in the billing service; this is blocking all work.,email,standard,2,billing service,high
+Customer reports slow application in the mobile app; this is affecting several users.,web,standard,3,mobile app,medium
+Customer reports data export in the web portal; this is minor inconvenience.,web,standard,1,web portal,low
+Customer reports slow application in the billing service; this is blocking all work.,web,business,4,billing service,high
+Customer reports data export in the analytics dashboard; this is blocking all work.,chat,standard,3,analytics dashboard,high
+Customer reports login failure in the web portal; this is blocking all work.,email,standard,1,web portal,high
+Customer reports login failure in the analytics dashboard; this is minor inconvenience.,phone,business,5,analytics dashboard,medium
+Customer reports slow application in the billing service; this is affecting several users.,chat,business,2,billing service,medium
+Customer reports incorrect invoice in the web portal; this is affecting several users.,email,standard,1,web portal,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,email,standard,2,analytics dashboard,low
+Customer reports data export in the web portal; this is affecting several users.,web,standard,2,web portal,medium
+Customer reports account locked in the billing service; this is blocking all work.,email,business,1,billing service,high
+Customer reports login failure in the web portal; this is minor inconvenience.,chat,standard,1,web portal,low
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,web,standard,1,analytics dashboard,low
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,chat,business,2,analytics dashboard,high
+Customer reports slow application in the web portal; this is minor inconvenience.,chat,standard,4,web portal,medium
+Customer reports slow application in the analytics dashboard; this is affecting several users.,email,enterprise,2,analytics dashboard,medium
+Customer reports incorrect invoice in the billing service; this is affecting several users.,email,standard,5,billing service,medium
+Customer reports data export in the mobile app; this is affecting several users.,web,standard,1,mobile app,medium
+Customer reports slow application in the mobile app; this is minor inconvenience.,chat,standard,2,mobile app,low
+Customer reports account locked in the mobile app; this is blocking all work.,chat,business,0,mobile app,high
+Customer reports account locked in the web portal; this is blocking all work.,email,standard,4,web portal,high
+Customer reports login failure in the mobile app; this is minor inconvenience.,chat,enterprise,1,mobile app,low
+Customer reports slow application in the mobile app; this is minor inconvenience.,chat,standard,4,mobile app,medium
+Customer reports login failure in the billing service; this is minor inconvenience.,email,standard,3,billing service,low
+Customer reports slow application in the web portal; this is affecting several users.,email,business,3,web portal,medium
+Customer reports incorrect invoice in the analytics dashboard; this is affecting several users.,phone,business,2,analytics dashboard,medium
+Customer reports incorrect invoice in the web portal; this is affecting several users.,phone,standard,2,web portal,medium
+Customer reports data export in the mobile app; this is affecting several users.,email,standard,3,mobile app,medium
+Customer reports login failure in the analytics dashboard; this is minor inconvenience.,phone,enterprise,5,analytics dashboard,medium
+Customer reports login failure in the web portal; this is affecting several users.,phone,business,4,web portal,medium
+Customer reports data export in the web portal; this is blocking all work.,phone,standard,6,web portal,high
+Customer reports slow application in the analytics dashboard; this is minor inconvenience.,email,standard,2,analytics dashboard,low
+Customer reports payment declined in the web portal; this is affecting several users.,chat,business,0,web portal,high
+Customer reports slow application in the web portal; this is minor inconvenience.,email,business,1,web portal,low
+Customer reports data export in the analytics dashboard; this is blocking all work.,phone,standard,2,analytics dashboard,high
+Customer reports account locked in the billing service; this is minor inconvenience.,email,business,4,billing service,medium
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,phone,standard,2,analytics dashboard,high
+Customer reports slow application in the web portal; this is affecting several users.,chat,business,1,web portal,medium
+Customer reports incorrect invoice in the billing service; this is affecting several users.,web,business,2,billing service,medium
+Customer reports slow application in the web portal; this is blocking all work.,chat,enterprise,1,web portal,high
+Customer reports login failure in the billing service; this is minor inconvenience.,chat,standard,3,billing service,low
+Customer reports login failure in the mobile app; this is affecting several users.,chat,standard,1,mobile app,medium
+Customer reports incorrect invoice in the analytics dashboard; this is minor inconvenience.,web,standard,2,analytics dashboard,low
+Customer reports data export in the mobile app; this is affecting several users.,web,enterprise,1,mobile app,medium
+Customer reports payment declined in the mobile app; this is affecting several users.,phone,standard,1,mobile app,medium
+Customer reports data export in the mobile app; this is affecting several users.,chat,business,4,mobile app,medium
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,chat,standard,2,analytics dashboard,high
+Customer reports incorrect invoice in the analytics dashboard; this is minor inconvenience.,phone,business,1,analytics dashboard,low
+Customer reports login failure in the mobile app; this is affecting several users.,email,standard,4,mobile app,medium
+Customer reports login failure in the web portal; this is minor inconvenience.,web,standard,2,web portal,low
+Customer reports login failure in the mobile app; this is minor inconvenience.,web,standard,1,mobile app,low
+Customer reports data export in the billing service; this is affecting several users.,web,business,1,billing service,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,web,enterprise,4,analytics dashboard,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,web,business,2,analytics dashboard,low
+Customer reports incorrect invoice in the analytics dashboard; this is minor inconvenience.,web,standard,6,analytics dashboard,medium
+Customer reports slow application in the mobile app; this is minor inconvenience.,chat,standard,2,mobile app,low
+Customer reports slow application in the mobile app; this is affecting several users.,phone,standard,3,mobile app,medium
+Customer reports payment declined in the billing service; this is affecting several users.,email,standard,2,billing service,medium
+Customer reports slow application in the billing service; this is minor inconvenience.,chat,enterprise,0,billing service,low
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,phone,business,2,web portal,low
+Customer reports payment declined in the web portal; this is affecting several users.,email,business,7,web portal,high
+Customer reports login failure in the mobile app; this is blocking all work.,chat,standard,3,mobile app,high
+Customer reports data export in the analytics dashboard; this is affecting several users.,web,standard,1,analytics dashboard,medium
+Customer reports payment declined in the billing service; this is affecting several users.,email,business,0,billing service,high
+Customer reports payment declined in the billing service; this is blocking all work.,email,standard,6,billing service,high
+Customer reports incorrect invoice in the web portal; this is blocking all work.,web,business,3,web portal,high
+Customer reports data export in the mobile app; this is affecting several users.,chat,standard,3,mobile app,medium
+Customer reports account locked in the analytics dashboard; this is blocking all work.,email,business,1,analytics dashboard,high
+Customer reports account locked in the mobile app; this is minor inconvenience.,web,standard,3,mobile app,low
+Customer reports login failure in the billing service; this is affecting several users.,phone,standard,5,billing service,medium
+Customer reports payment declined in the web portal; this is minor inconvenience.,phone,business,3,web portal,high
+Customer reports payment declined in the analytics dashboard; this is affecting several users.,email,business,2,analytics dashboard,high
+Customer reports login failure in the billing service; this is affecting several users.,email,standard,3,billing service,medium
+Customer reports login failure in the web portal; this is minor inconvenience.,email,enterprise,1,web portal,low
+Customer reports incorrect invoice in the billing service; this is blocking all work.,chat,standard,2,billing service,high
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,phone,business,2,analytics dashboard,low
+Customer reports account locked in the analytics dashboard; this is affecting several users.,phone,standard,3,analytics dashboard,medium
+Customer reports slow application in the web portal; this is affecting several users.,phone,standard,0,web portal,medium
+Customer reports login failure in the analytics dashboard; this is affecting several users.,phone,business,2,analytics dashboard,medium
+Customer reports payment declined in the web portal; this is affecting several users.,phone,standard,4,web portal,medium
+Customer reports data export in the analytics dashboard; this is affecting several users.,phone,standard,1,analytics dashboard,medium
+Customer reports account locked in the mobile app; this is affecting several users.,email,business,2,mobile app,medium
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,email,standard,4,web portal,medium
+Customer reports payment declined in the analytics dashboard; this is blocking all work.,chat,enterprise,0,analytics dashboard,high
+Customer reports data export in the web portal; this is minor inconvenience.,web,business,2,web portal,low
+Customer reports incorrect invoice in the mobile app; this is affecting several users.,web,enterprise,1,mobile app,medium
+Customer reports slow application in the web portal; this is blocking all work.,phone,standard,1,web portal,high
+Customer reports data export in the analytics dashboard; this is affecting several users.,web,standard,3,analytics dashboard,medium
+Customer reports payment declined in the billing service; this is minor inconvenience.,email,business,2,billing service,high
+Customer reports login failure in the web portal; this is minor inconvenience.,email,business,2,web portal,low
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,web,standard,8,billing service,medium
+Customer reports account locked in the mobile app; this is minor inconvenience.,chat,standard,2,mobile app,low
+Customer reports account locked in the billing service; this is blocking all work.,chat,business,2,billing service,high
+Customer reports login failure in the web portal; this is affecting several users.,web,standard,3,web portal,medium
+Customer reports data export in the analytics dashboard; this is blocking all work.,chat,standard,2,analytics dashboard,high
+Customer reports account locked in the billing service; this is blocking all work.,phone,enterprise,3,billing service,high
+Customer reports account locked in the mobile app; this is minor inconvenience.,phone,business,4,mobile app,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,web,business,1,analytics dashboard,low
+Customer reports incorrect invoice in the web portal; this is blocking all work.,chat,business,3,web portal,high
+Customer reports incorrect invoice in the billing service; this is affecting several users.,phone,standard,2,billing service,medium
+Customer reports incorrect invoice in the mobile app; this is affecting several users.,chat,business,1,mobile app,medium
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,phone,enterprise,4,billing service,medium
+Customer reports data export in the web portal; this is minor inconvenience.,chat,standard,3,web portal,low
+Customer reports payment declined in the mobile app; this is blocking all work.,email,business,1,mobile app,high
+Customer reports incorrect invoice in the web portal; this is affecting several users.,web,enterprise,0,web portal,medium
+Customer reports account locked in the analytics dashboard; this is affecting several users.,email,business,3,analytics dashboard,medium
+Customer reports payment declined in the billing service; this is affecting several users.,web,standard,1,billing service,medium
+Customer reports payment declined in the mobile app; this is blocking all work.,phone,enterprise,2,mobile app,high
+Customer reports incorrect invoice in the mobile app; this is blocking all work.,web,enterprise,1,mobile app,high
+Customer reports slow application in the analytics dashboard; this is affecting several users.,web,business,1,analytics dashboard,medium
+Customer reports account locked in the mobile app; this is affecting several users.,chat,business,1,mobile app,medium
+Customer reports incorrect invoice in the mobile app; this is affecting several users.,email,business,0,mobile app,medium
+Customer reports login failure in the web portal; this is affecting several users.,web,standard,1,web portal,medium
+Customer reports account locked in the mobile app; this is affecting several users.,web,enterprise,2,mobile app,medium
+Customer reports login failure in the web portal; this is minor inconvenience.,phone,enterprise,1,web portal,low
+Customer reports login failure in the analytics dashboard; this is affecting several users.,chat,standard,1,analytics dashboard,medium
+Customer reports data export in the web portal; this is minor inconvenience.,email,business,1,web portal,low
+Customer reports login failure in the analytics dashboard; this is minor inconvenience.,email,standard,1,analytics dashboard,low
+Customer reports slow application in the billing service; this is blocking all work.,web,standard,2,billing service,high
+Customer reports incorrect invoice in the mobile app; this is minor inconvenience.,phone,standard,5,mobile app,medium
+Customer reports incorrect invoice in the web portal; this is affecting several users.,chat,business,0,web portal,medium
+Customer reports login failure in the mobile app; this is minor inconvenience.,email,standard,1,mobile app,low
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,web,business,6,web portal,medium
+Customer reports login failure in the analytics dashboard; this is affecting several users.,phone,enterprise,0,analytics dashboard,medium
+Customer reports data export in the billing service; this is minor inconvenience.,phone,standard,4,billing service,medium
+Customer reports login failure in the analytics dashboard; this is affecting several users.,web,enterprise,3,analytics dashboard,medium
+Customer reports incorrect invoice in the web portal; this is affecting several users.,chat,standard,3,web portal,medium
+Customer reports slow application in the web portal; this is blocking all work.,email,standard,1,web portal,high
+Customer reports account locked in the mobile app; this is blocking all work.,email,standard,2,mobile app,high
+Customer reports account locked in the mobile app; this is minor inconvenience.,phone,enterprise,1,mobile app,low
+Customer reports login failure in the web portal; this is minor inconvenience.,email,standard,4,web portal,medium
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,chat,standard,2,web portal,low
+Customer reports login failure in the analytics dashboard; this is blocking all work.,phone,standard,0,analytics dashboard,high
+Customer reports payment declined in the billing service; this is minor inconvenience.,web,standard,1,billing service,low
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,phone,standard,4,web portal,medium
+Customer reports payment declined in the billing service; this is minor inconvenience.,chat,standard,3,billing service,low
+Customer reports slow application in the analytics dashboard; this is minor inconvenience.,web,business,0,analytics dashboard,low
+Customer reports data export in the billing service; this is minor inconvenience.,email,enterprise,1,billing service,low
+Customer reports payment declined in the billing service; this is blocking all work.,web,standard,3,billing service,high
+Customer reports payment declined in the billing service; this is minor inconvenience.,chat,standard,2,billing service,low
+Customer reports account locked in the analytics dashboard; this is affecting several users.,phone,standard,1,analytics dashboard,medium
+Customer reports incorrect invoice in the mobile app; this is minor inconvenience.,email,business,2,mobile app,low
+Customer reports login failure in the billing service; this is minor inconvenience.,phone,business,1,billing service,low
+Customer reports login failure in the mobile app; this is blocking all work.,email,standard,2,mobile app,high
+Customer reports account locked in the web portal; this is minor inconvenience.,email,standard,4,web portal,medium
+Customer reports account locked in the billing service; this is minor inconvenience.,email,business,2,billing service,low
+Customer reports login failure in the billing service; this is affecting several users.,email,standard,1,billing service,medium
+Customer reports account locked in the mobile app; this is affecting several users.,web,enterprise,2,mobile app,medium
+Customer reports slow application in the web portal; this is minor inconvenience.,web,standard,1,web portal,low
+Customer reports data export in the billing service; this is affecting several users.,phone,standard,2,billing service,medium
+Customer reports data export in the billing service; this is minor inconvenience.,chat,business,3,billing service,low
+Customer reports slow application in the billing service; this is affecting several users.,chat,standard,2,billing service,medium
+Customer reports payment declined in the billing service; this is affecting several users.,phone,standard,4,billing service,medium
+Customer reports payment declined in the analytics dashboard; this is affecting several users.,chat,business,1,analytics dashboard,high
+Customer reports account locked in the web portal; this is minor inconvenience.,chat,business,0,web portal,low
+Customer reports slow application in the web portal; this is affecting several users.,chat,standard,3,web portal,medium
+Customer reports slow application in the mobile app; this is affecting several users.,chat,business,5,mobile app,medium
+Customer reports payment declined in the web portal; this is blocking all work.,web,standard,3,web portal,high
+Customer reports data export in the billing service; this is affecting several users.,phone,standard,2,billing service,medium
+Customer reports slow application in the billing service; this is minor inconvenience.,phone,standard,2,billing service,low
+Customer reports payment declined in the billing service; this is minor inconvenience.,web,business,1,billing service,high
+Customer reports payment declined in the billing service; this is blocking all work.,email,standard,1,billing service,high
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,phone,standard,4,web portal,medium
+Customer reports data export in the billing service; this is affecting several users.,email,business,1,billing service,medium
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,email,standard,2,analytics dashboard,high
+Customer reports payment declined in the web portal; this is minor inconvenience.,email,enterprise,3,web portal,high
+Customer reports incorrect invoice in the mobile app; this is blocking all work.,web,business,0,mobile app,high
+Customer reports payment declined in the mobile app; this is affecting several users.,email,standard,2,mobile app,medium
+Customer reports data export in the analytics dashboard; this is minor inconvenience.,chat,standard,2,analytics dashboard,low
+Customer reports incorrect invoice in the web portal; this is blocking all work.,email,standard,4,web portal,high
+Customer reports slow application in the analytics dashboard; this is minor inconvenience.,chat,standard,3,analytics dashboard,low
+Customer reports data export in the web portal; this is minor inconvenience.,web,standard,3,web portal,low
+Customer reports incorrect invoice in the billing service; this is blocking all work.,chat,business,2,billing service,high
+Customer reports slow application in the web portal; this is affecting several users.,web,standard,3,web portal,medium
+Customer reports incorrect invoice in the mobile app; this is blocking all work.,email,enterprise,1,mobile app,high
+Customer reports slow application in the billing service; this is minor inconvenience.,email,standard,2,billing service,low
+Customer reports slow application in the mobile app; this is affecting several users.,email,standard,1,mobile app,medium
+Customer reports slow application in the mobile app; this is affecting several users.,web,enterprise,3,mobile app,medium
+Customer reports slow application in the web portal; this is blocking all work.,chat,standard,4,web portal,high
+Customer reports payment declined in the web portal; this is minor inconvenience.,chat,standard,4,web portal,medium
+Customer reports payment declined in the mobile app; this is minor inconvenience.,web,standard,1,mobile app,low
+Customer reports incorrect invoice in the analytics dashboard; this is minor inconvenience.,chat,business,2,analytics dashboard,low
+Customer reports account locked in the web portal; this is affecting several users.,phone,standard,3,web portal,medium
+Customer reports data export in the mobile app; this is affecting several users.,web,standard,0,mobile app,medium
+Customer reports slow application in the billing service; this is minor inconvenience.,web,business,6,billing service,medium
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,email,business,3,web portal,low
+Customer reports data export in the mobile app; this is blocking all work.,web,standard,1,mobile app,high
+Customer reports incorrect invoice in the billing service; this is affecting several users.,email,standard,6,billing service,medium
+Customer reports slow application in the mobile app; this is minor inconvenience.,email,standard,3,mobile app,low
+Customer reports account locked in the web portal; this is affecting several users.,phone,enterprise,2,web portal,medium
+Customer reports data export in the web portal; this is affecting several users.,chat,business,2,web portal,medium
+Customer reports incorrect invoice in the mobile app; this is minor inconvenience.,chat,standard,6,mobile app,medium
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,web,enterprise,4,billing service,medium
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,phone,standard,2,analytics dashboard,high
+Customer reports data export in the analytics dashboard; this is blocking all work.,phone,business,2,analytics dashboard,high
+Customer reports incorrect invoice in the mobile app; this is minor inconvenience.,chat,standard,3,mobile app,low
+Customer reports account locked in the analytics dashboard; this is affecting several users.,chat,business,0,analytics dashboard,medium
+Customer reports payment declined in the analytics dashboard; this is affecting several users.,web,standard,3,analytics dashboard,medium
+Customer reports login failure in the billing service; this is affecting several users.,email,enterprise,2,billing service,medium
+Customer reports payment declined in the web portal; this is affecting several users.,email,standard,2,web portal,medium
+Customer reports data export in the mobile app; this is affecting several users.,web,standard,4,mobile app,medium
+Customer reports data export in the analytics dashboard; this is blocking all work.,phone,business,3,analytics dashboard,high
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,email,standard,1,billing service,low
+Customer reports data export in the analytics dashboard; this is blocking all work.,email,business,2,analytics dashboard,high
+Customer reports slow application in the mobile app; this is blocking all work.,phone,business,1,mobile app,high
+Customer reports account locked in the analytics dashboard; this is affecting several users.,email,business,0,analytics dashboard,medium
+Customer reports slow application in the mobile app; this is minor inconvenience.,phone,standard,1,mobile app,low
+Customer reports slow application in the web portal; this is affecting several users.,email,business,3,web portal,medium
+Customer reports account locked in the billing service; this is blocking all work.,web,standard,3,billing service,high
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,email,standard,0,analytics dashboard,low
+Customer reports account locked in the billing service; this is minor inconvenience.,web,business,0,billing service,low
+Customer reports incorrect invoice in the web portal; this is affecting several users.,phone,standard,3,web portal,medium
+Customer reports incorrect invoice in the billing service; this is affecting several users.,chat,standard,6,billing service,medium
+Customer reports login failure in the billing service; this is minor inconvenience.,email,enterprise,2,billing service,low
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,web,business,2,analytics dashboard,high
+Customer reports account locked in the mobile app; this is minor inconvenience.,email,standard,3,mobile app,low
+Customer reports payment declined in the web portal; this is affecting several users.,phone,standard,3,web portal,medium
+Customer reports login failure in the mobile app; this is blocking all work.,email,standard,1,mobile app,high
+Customer reports account locked in the web portal; this is minor inconvenience.,email,enterprise,1,web portal,low
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,web,enterprise,3,web portal,low
+Customer reports data export in the web portal; this is affecting several users.,chat,standard,1,web portal,medium
+Customer reports slow application in the billing service; this is blocking all work.,phone,standard,2,billing service,high
+Customer reports account locked in the billing service; this is affecting several users.,web,business,1,billing service,medium
+Customer reports payment declined in the web portal; this is minor inconvenience.,chat,standard,1,web portal,low
+Customer reports payment declined in the analytics dashboard; this is minor inconvenience.,web,standard,2,analytics dashboard,low
+Customer reports account locked in the billing service; this is blocking all work.,phone,standard,3,billing service,high
+Customer reports account locked in the mobile app; this is affecting several users.,email,business,2,mobile app,medium
+Customer reports account locked in the billing service; this is minor inconvenience.,phone,business,0,billing service,low
+Customer reports data export in the web portal; this is minor inconvenience.,chat,enterprise,0,web portal,low
+Customer reports incorrect invoice in the mobile app; this is affecting several users.,email,business,3,mobile app,medium
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,email,enterprise,3,billing service,low
+Customer reports payment declined in the mobile app; this is minor inconvenience.,web,standard,2,mobile app,low
+Customer reports account locked in the analytics dashboard; this is blocking all work.,web,standard,1,analytics dashboard,high
+Customer reports account locked in the mobile app; this is affecting several users.,phone,business,4,mobile app,medium
+Customer reports account locked in the web portal; this is minor inconvenience.,web,standard,3,web portal,low
+Customer reports account locked in the mobile app; this is minor inconvenience.,phone,standard,2,mobile app,low
+Customer reports data export in the web portal; this is affecting several users.,web,enterprise,2,web portal,medium
+Customer reports account locked in the web portal; this is blocking all work.,web,enterprise,1,web portal,high
+Customer reports payment declined in the billing service; this is blocking all work.,web,standard,2,billing service,high
+Customer reports login failure in the analytics dashboard; this is minor inconvenience.,phone,standard,2,analytics dashboard,low
+Customer reports payment declined in the mobile app; this is minor inconvenience.,chat,business,3,mobile app,high
+Customer reports login failure in the analytics dashboard; this is minor inconvenience.,web,business,2,analytics dashboard,low
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,email,standard,3,web portal,low
+Customer reports payment declined in the analytics dashboard; this is affecting several users.,phone,standard,2,analytics dashboard,medium
+Customer reports slow application in the web portal; this is minor inconvenience.,phone,standard,2,web portal,low
+Customer reports login failure in the billing service; this is blocking all work.,email,standard,3,billing service,high
+Customer reports slow application in the mobile app; this is affecting several users.,web,enterprise,0,mobile app,medium
+Customer reports account locked in the billing service; this is affecting several users.,email,enterprise,1,billing service,medium
+Customer reports account locked in the billing service; this is minor inconvenience.,phone,business,4,billing service,medium
+Customer reports login failure in the billing service; this is minor inconvenience.,chat,business,3,billing service,low
+Customer reports slow application in the analytics dashboard; this is blocking all work.,phone,standard,2,analytics dashboard,high
+Customer reports login failure in the analytics dashboard; this is affecting several users.,phone,standard,3,analytics dashboard,medium
+Customer reports incorrect invoice in the mobile app; this is minor inconvenience.,phone,standard,2,mobile app,low
+Customer reports slow application in the billing service; this is minor inconvenience.,web,standard,1,billing service,low
+Customer reports data export in the billing service; this is minor inconvenience.,chat,business,4,billing service,medium
+Customer reports slow application in the analytics dashboard; this is blocking all work.,phone,business,2,analytics dashboard,high
+Customer reports login failure in the web portal; this is minor inconvenience.,web,standard,6,web portal,medium
+Customer reports login failure in the analytics dashboard; this is minor inconvenience.,phone,business,2,analytics dashboard,low
+Customer reports login failure in the analytics dashboard; this is blocking all work.,email,enterprise,2,analytics dashboard,high
+Customer reports data export in the web portal; this is minor inconvenience.,phone,enterprise,1,web portal,low
+Customer reports payment declined in the mobile app; this is blocking all work.,chat,standard,3,mobile app,high
+Customer reports data export in the mobile app; this is blocking all work.,email,standard,5,mobile app,high
+Customer reports slow application in the billing service; this is minor inconvenience.,phone,standard,0,billing service,low
+Customer reports slow application in the web portal; this is blocking all work.,email,business,1,web portal,high
+Customer reports login failure in the web portal; this is minor inconvenience.,web,business,2,web portal,low
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,phone,enterprise,0,billing service,low
+Customer reports data export in the billing service; this is minor inconvenience.,email,business,4,billing service,medium
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,phone,business,1,billing service,low
+Customer reports account locked in the web portal; this is blocking all work.,phone,standard,1,web portal,high
+Customer reports payment declined in the billing service; this is blocking all work.,chat,business,1,billing service,high
+Customer reports payment declined in the mobile app; this is affecting several users.,email,enterprise,2,mobile app,high
+Customer reports payment declined in the analytics dashboard; this is blocking all work.,phone,business,0,analytics dashboard,high
+Customer reports data export in the billing service; this is minor inconvenience.,chat,business,2,billing service,low
+Customer reports slow application in the analytics dashboard; this is minor inconvenience.,phone,business,2,analytics dashboard,low
+Customer reports login failure in the analytics dashboard; this is blocking all work.,phone,standard,0,analytics dashboard,high
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,chat,enterprise,2,analytics dashboard,low
+Customer reports incorrect invoice in the analytics dashboard; this is minor inconvenience.,email,standard,1,analytics dashboard,low
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,web,standard,6,billing service,medium
+Customer reports login failure in the analytics dashboard; this is minor inconvenience.,web,standard,1,analytics dashboard,low
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,email,standard,3,web portal,low
+Customer reports data export in the analytics dashboard; this is minor inconvenience.,phone,business,0,analytics dashboard,low
+Customer reports data export in the mobile app; this is minor inconvenience.,chat,standard,1,mobile app,low
+Customer reports login failure in the billing service; this is minor inconvenience.,chat,standard,6,billing service,medium
+Customer reports login failure in the analytics dashboard; this is blocking all work.,phone,standard,3,analytics dashboard,high
+Customer reports account locked in the mobile app; this is affecting several users.,web,standard,2,mobile app,medium
+Customer reports data export in the mobile app; this is affecting several users.,web,standard,0,mobile app,medium
+Customer reports slow application in the billing service; this is minor inconvenience.,web,standard,1,billing service,low
+Customer reports slow application in the analytics dashboard; this is blocking all work.,email,standard,1,analytics dashboard,high
+Customer reports login failure in the billing service; this is minor inconvenience.,phone,business,2,billing service,low
+Customer reports data export in the analytics dashboard; this is affecting several users.,email,enterprise,0,analytics dashboard,medium
+Customer reports data export in the billing service; this is minor inconvenience.,web,standard,0,billing service,low
+Customer reports slow application in the billing service; this is affecting several users.,web,standard,6,billing service,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,phone,standard,3,analytics dashboard,low
+Customer reports slow application in the analytics dashboard; this is blocking all work.,chat,enterprise,3,analytics dashboard,high
+Customer reports incorrect invoice in the analytics dashboard; this is minor inconvenience.,phone,enterprise,1,analytics dashboard,low
+Customer reports data export in the analytics dashboard; this is affecting several users.,chat,enterprise,4,analytics dashboard,medium
+Customer reports incorrect invoice in the web portal; this is affecting several users.,chat,standard,1,web portal,medium
+Customer reports data export in the analytics dashboard; this is minor inconvenience.,web,enterprise,5,analytics dashboard,medium
+Customer reports data export in the mobile app; this is minor inconvenience.,email,standard,1,mobile app,low
+Customer reports data export in the billing service; this is minor inconvenience.,web,standard,1,billing service,low
+Customer reports data export in the mobile app; this is minor inconvenience.,web,standard,2,mobile app,low
+Customer reports data export in the billing service; this is affecting several users.,web,business,1,billing service,medium
+Customer reports payment declined in the web portal; this is minor inconvenience.,email,business,5,web portal,high
+Customer reports incorrect invoice in the mobile app; this is affecting several users.,web,standard,2,mobile app,medium
+Customer reports slow application in the web portal; this is affecting several users.,web,business,0,web portal,medium
+Customer reports slow application in the mobile app; this is minor inconvenience.,chat,standard,2,mobile app,low
+Customer reports login failure in the mobile app; this is affecting several users.,phone,business,3,mobile app,medium
+Customer reports login failure in the billing service; this is affecting several users.,chat,standard,2,billing service,medium
+Customer reports payment declined in the mobile app; this is affecting several users.,chat,standard,2,mobile app,medium
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,web,standard,0,billing service,low
+Customer reports data export in the web portal; this is blocking all work.,email,standard,3,web portal,high
+Customer reports data export in the analytics dashboard; this is affecting several users.,chat,standard,4,analytics dashboard,medium
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,email,standard,2,web portal,low
+Customer reports incorrect invoice in the web portal; this is blocking all work.,web,standard,6,web portal,high
+Customer reports account locked in the billing service; this is minor inconvenience.,web,business,2,billing service,low
+Customer reports payment declined in the billing service; this is blocking all work.,phone,enterprise,1,billing service,high
+Customer reports data export in the billing service; this is minor inconvenience.,web,standard,5,billing service,medium
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,chat,standard,3,analytics dashboard,high
+Customer reports account locked in the analytics dashboard; this is affecting several users.,chat,business,2,analytics dashboard,medium
+Customer reports data export in the web portal; this is affecting several users.,phone,business,2,web portal,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,email,business,1,analytics dashboard,low
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,web,business,0,billing service,low
+Customer reports account locked in the billing service; this is affecting several users.,email,standard,2,billing service,medium
+Customer reports payment declined in the billing service; this is affecting several users.,web,standard,1,billing service,medium
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,chat,standard,4,web portal,medium
+Customer reports login failure in the billing service; this is minor inconvenience.,phone,standard,3,billing service,low
+Customer reports account locked in the billing service; this is affecting several users.,web,standard,1,billing service,medium
+Customer reports incorrect invoice in the analytics dashboard; this is affecting several users.,chat,business,2,analytics dashboard,medium
+Customer reports data export in the mobile app; this is minor inconvenience.,email,standard,2,mobile app,low
+Customer reports login failure in the web portal; this is minor inconvenience.,phone,standard,2,web portal,low
+Customer reports login failure in the web portal; this is minor inconvenience.,phone,standard,3,web portal,low
+Customer reports login failure in the analytics dashboard; this is affecting several users.,email,business,4,analytics dashboard,medium
+Customer reports account locked in the mobile app; this is minor inconvenience.,web,standard,1,mobile app,low
+Customer reports login failure in the web portal; this is affecting several users.,web,business,1,web portal,medium
+Customer reports payment declined in the billing service; this is affecting several users.,email,standard,2,billing service,medium
+Customer reports incorrect invoice in the web portal; this is affecting several users.,chat,standard,1,web portal,medium
+Customer reports data export in the mobile app; this is affecting several users.,email,standard,3,mobile app,medium
+Customer reports payment declined in the billing service; this is minor inconvenience.,web,standard,2,billing service,low
+Customer reports data export in the web portal; this is minor inconvenience.,web,standard,3,web portal,low
+Customer reports login failure in the mobile app; this is minor inconvenience.,email,business,3,mobile app,low
+Customer reports account locked in the billing service; this is minor inconvenience.,email,business,2,billing service,low
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,email,enterprise,0,analytics dashboard,low
+Customer reports account locked in the web portal; this is minor inconvenience.,phone,business,3,web portal,low
+Customer reports slow application in the analytics dashboard; this is minor inconvenience.,email,business,4,analytics dashboard,medium
+Customer reports payment declined in the web portal; this is blocking all work.,phone,standard,2,web portal,high
+Customer reports slow application in the web portal; this is blocking all work.,chat,business,3,web portal,high
+Customer reports payment declined in the web portal; this is minor inconvenience.,phone,standard,3,web portal,low
+Customer reports slow application in the mobile app; this is minor inconvenience.,phone,standard,5,mobile app,medium
+Customer reports login failure in the web portal; this is affecting several users.,chat,business,0,web portal,medium
+Customer reports slow application in the mobile app; this is blocking all work.,web,business,3,mobile app,high
+Customer reports data export in the analytics dashboard; this is affecting several users.,email,standard,3,analytics dashboard,medium
+Customer reports data export in the mobile app; this is minor inconvenience.,phone,enterprise,1,mobile app,low
+Customer reports data export in the analytics dashboard; this is affecting several users.,web,standard,0,analytics dashboard,medium
+Customer reports slow application in the web portal; this is minor inconvenience.,phone,enterprise,1,web portal,low
+Customer reports payment declined in the billing service; this is minor inconvenience.,web,standard,3,billing service,low
+Customer reports data export in the billing service; this is minor inconvenience.,email,enterprise,2,billing service,low
+Customer reports payment declined in the mobile app; this is affecting several users.,chat,standard,0,mobile app,medium
+Customer reports account locked in the web portal; this is minor inconvenience.,email,standard,3,web portal,low
+Customer reports incorrect invoice in the mobile app; this is minor inconvenience.,phone,standard,2,mobile app,low
+Customer reports login failure in the web portal; this is affecting several users.,phone,standard,3,web portal,medium
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,chat,standard,1,web portal,low
+Customer reports payment declined in the analytics dashboard; this is minor inconvenience.,email,standard,0,analytics dashboard,low
+Customer reports slow application in the mobile app; this is blocking all work.,email,business,5,mobile app,high
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,phone,standard,1,web portal,low
+Customer reports incorrect invoice in the mobile app; this is affecting several users.,chat,enterprise,5,mobile app,medium
+Customer reports data export in the analytics dashboard; this is minor inconvenience.,phone,standard,1,analytics dashboard,low
+Customer reports incorrect invoice in the analytics dashboard; this is blocking all work.,web,standard,1,analytics dashboard,high
+Customer reports data export in the mobile app; this is minor inconvenience.,phone,business,0,mobile app,low
+Customer reports payment declined in the billing service; this is minor inconvenience.,chat,standard,2,billing service,low
+Customer reports login failure in the web portal; this is affecting several users.,chat,standard,2,web portal,medium
+Customer reports incorrect invoice in the mobile app; this is blocking all work.,email,business,0,mobile app,high
+Customer reports login failure in the billing service; this is affecting several users.,phone,business,5,billing service,medium
+Customer reports slow application in the web portal; this is minor inconvenience.,web,standard,1,web portal,low
+Customer reports payment declined in the mobile app; this is affecting several users.,chat,business,1,mobile app,high
+Customer reports payment declined in the billing service; this is affecting several users.,chat,standard,2,billing service,medium
+Customer reports slow application in the analytics dashboard; this is affecting several users.,chat,business,1,analytics dashboard,medium
+Customer reports payment declined in the analytics dashboard; this is affecting several users.,email,enterprise,0,analytics dashboard,high
+Customer reports incorrect invoice in the mobile app; this is affecting several users.,web,standard,1,mobile app,medium
+Customer reports account locked in the web portal; this is minor inconvenience.,phone,business,3,web portal,low
+Customer reports login failure in the billing service; this is blocking all work.,phone,standard,2,billing service,high
+Customer reports account locked in the web portal; this is blocking all work.,email,business,4,web portal,high
+Customer reports payment declined in the web portal; this is affecting several users.,web,business,2,web portal,high
+Customer reports data export in the web portal; this is minor inconvenience.,phone,enterprise,1,web portal,low
+Customer reports login failure in the analytics dashboard; this is affecting several users.,chat,business,2,analytics dashboard,medium
+Customer reports data export in the billing service; this is minor inconvenience.,email,enterprise,1,billing service,low
+Customer reports incorrect invoice in the billing service; this is minor inconvenience.,chat,standard,1,billing service,low
+Customer reports slow application in the mobile app; this is minor inconvenience.,chat,business,2,mobile app,low
+Customer reports data export in the web portal; this is blocking all work.,chat,business,1,web portal,high
+Customer reports data export in the analytics dashboard; this is affecting several users.,web,standard,3,analytics dashboard,medium
+Customer reports incorrect invoice in the analytics dashboard; this is minor inconvenience.,email,standard,6,analytics dashboard,medium
+Customer reports payment declined in the billing service; this is affecting several users.,email,standard,3,billing service,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,phone,standard,4,analytics dashboard,medium
+Customer reports login failure in the web portal; this is affecting several users.,phone,standard,1,web portal,medium
+Customer reports payment declined in the web portal; this is minor inconvenience.,email,standard,3,web portal,low
+Customer reports account locked in the web portal; this is affecting several users.,chat,business,5,web portal,medium
+Customer reports data export in the web portal; this is affecting several users.,phone,business,1,web portal,medium
+Customer reports payment declined in the billing service; this is affecting several users.,chat,standard,2,billing service,medium
+Customer reports login failure in the web portal; this is minor inconvenience.,email,business,2,web portal,low
+Customer reports incorrect invoice in the analytics dashboard; this is affecting several users.,chat,business,0,analytics dashboard,medium
+Customer reports account locked in the web portal; this is affecting several users.,chat,standard,1,web portal,medium
+Customer reports incorrect invoice in the web portal; this is minor inconvenience.,web,standard,5,web portal,medium
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,email,standard,1,analytics dashboard,low
+Customer reports login failure in the billing service; this is affecting several users.,phone,standard,4,billing service,medium
+Customer reports slow application in the billing service; this is affecting several users.,phone,enterprise,2,billing service,medium
+Customer reports slow application in the web portal; this is affecting several users.,web,standard,1,web portal,medium
+Customer reports login failure in the mobile app; this is affecting several users.,chat,standard,0,mobile app,medium
+Customer reports data export in the analytics dashboard; this is blocking all work.,chat,business,1,analytics dashboard,high
+Customer reports incorrect invoice in the mobile app; this is blocking all work.,web,standard,3,mobile app,high
+Customer reports payment declined in the web portal; this is minor inconvenience.,phone,business,1,web portal,high
+Customer reports login failure in the analytics dashboard; this is affecting several users.,chat,business,2,analytics dashboard,medium
+Customer reports slow application in the web portal; this is minor inconvenience.,web,business,3,web portal,low
+Customer reports slow application in the billing service; this is minor inconvenience.,chat,standard,1,billing service,low
+Customer reports login failure in the billing service; this is affecting several users.,chat,standard,2,billing service,medium
+Customer reports account locked in the analytics dashboard; this is blocking all work.,phone,standard,3,analytics dashboard,high
+Customer reports payment declined in the analytics dashboard; this is affecting several users.,phone,standard,3,analytics dashboard,medium
+Customer reports account locked in the mobile app; this is affecting several users.,email,standard,1,mobile app,medium
+Customer reports slow application in the mobile app; this is minor inconvenience.,phone,standard,1,mobile app,low
+Customer reports account locked in the mobile app; this is blocking all work.,chat,business,2,mobile app,high
+Customer reports slow application in the billing service; this is minor inconvenience.,email,business,1,billing service,low
+Customer reports slow application in the billing service; this is minor inconvenience.,phone,standard,2,billing service,low
+Customer reports account locked in the web portal; this is minor inconvenience.,email,enterprise,4,web portal,medium
+Customer reports data export in the billing service; this is minor inconvenience.,email,standard,3,billing service,low
+Customer reports payment declined in the web portal; this is minor inconvenience.,email,standard,4,web portal,medium
+Customer reports data export in the mobile app; this is minor inconvenience.,email,standard,3,mobile app,low
+Customer reports data export in the analytics dashboard; this is blocking all work.,email,standard,0,analytics dashboard,high
+Customer reports data export in the analytics dashboard; this is minor inconvenience.,chat,standard,1,analytics dashboard,low
+Customer reports account locked in the mobile app; this is minor inconvenience.,chat,standard,4,mobile app,medium
+Customer reports login failure in the billing service; this is affecting several users.,email,business,2,billing service,medium
+Customer reports slow application in the web portal; this is minor inconvenience.,web,enterprise,2,web portal,low
+Customer reports account locked in the web portal; this is minor inconvenience.,web,business,2,web portal,low
+Customer reports account locked in the mobile app; this is blocking all work.,chat,standard,2,mobile app,high
+Customer reports payment declined in the mobile app; this is minor inconvenience.,web,enterprise,2,mobile app,high
+Customer reports data export in the mobile app; this is minor inconvenience.,web,standard,3,mobile app,low
+Customer reports login failure in the web portal; this is affecting several users.,email,business,2,web portal,medium
+Customer reports login failure in the mobile app; this is minor inconvenience.,phone,enterprise,1,mobile app,low
+Customer reports account locked in the analytics dashboard; this is minor inconvenience.,phone,enterprise,3,analytics dashboard,low
+Customer reports slow application in the analytics dashboard; this is affecting several users.,phone,business,1,analytics dashboard,medium
+Customer reports payment declined in the billing service; this is minor inconvenience.,phone,standard,2,billing service,low
+Customer reports data export in the analytics dashboard; this is minor inconvenience.,web,enterprise,6,analytics dashboard,medium
+Customer reports payment declined in the mobile app; this is affecting several users.,phone,standard,6,mobile app,medium
+Customer reports account locked in the web portal; this is affecting several users.,chat,standard,2,web portal,medium
+Customer reports account locked in the web portal; this is minor inconvenience.,email,standard,3,web portal,low
+Customer reports login failure in the web portal; this is affecting several users.,email,standard,4,web portal,medium
