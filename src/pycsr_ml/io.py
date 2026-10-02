@@ -8,15 +8,15 @@ from typing import Optional, Tuple, Union
 
 import pandas as pd
 
-
 SUPPORTED_EXTENSIONS = {".csv", ".txt"}
 
 
 def _detect_encoding(path: Path) -> str:
     """Choose a practical encoding without adding a heavyweight dependency."""
+    sample = path.read_bytes()[:1_048_576]
     for encoding in ("utf-8-sig", "utf-8", "cp1252", "latin-1"):
         try:
-            path.read_text(encoding=encoding)
+            sample.decode(encoding)
             return encoding
         except UnicodeDecodeError:
             continue
@@ -43,15 +43,20 @@ def load_dataset(input_path: Union[str, Path]) -> Tuple[pd.DataFrame, dict]:
         raise ValueError("Input file is empty.")
 
     encoding = _detect_encoding(path)
-    sample = path.read_text(encoding=encoding, errors="replace")[:65536]
+    with path.open("r", encoding=encoding, errors="replace") as stream:
+        sample = stream.read(65536)
     delimiter = _sniff_delimiter(sample)
     load_mode = "delimited"
 
     if path.suffix.lower() == ".csv":
         delimiter = delimiter or ","
-        frame = pd.read_csv(path, sep=delimiter, encoding=encoding, low_memory=False)
+        frame = pd.read_csv(
+            path, sep=delimiter, encoding=encoding, low_memory=False, on_bad_lines="skip"
+        )
     elif delimiter:
-        frame = pd.read_csv(path, sep=delimiter, encoding=encoding, low_memory=False)
+        frame = pd.read_csv(
+            path, sep=delimiter, encoding=encoding, low_memory=False, on_bad_lines="skip"
+        )
     else:
         lines = path.read_text(encoding=encoding, errors="replace").splitlines()
         frame = pd.DataFrame({"text": [line for line in lines if line.strip()]})
@@ -68,6 +73,7 @@ def load_dataset(input_path: Union[str, Path]) -> Tuple[pd.DataFrame, dict]:
         "encoding": encoding,
         "delimiter": repr(delimiter) if delimiter else "n/a",
         "load_mode": load_mode,
+        "malformed_row_policy": "skip rows with an invalid field count",
     }
     return frame, metadata
 

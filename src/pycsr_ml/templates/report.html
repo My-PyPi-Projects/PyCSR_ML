@@ -44,9 +44,20 @@
     .pill { display:inline-block; padding:3px 9px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:12px; font-weight:700; }
     .pill.best { background:#d1fae5; color:#047857; }
     .callout { background:#eff6ff; border:1px solid #bfdbfe; padding:16px; border-radius:10px; }
+    .pipeline { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin:4px 0 24px; }
+    .pipeline-step { background:#e0f2fe; border:1px solid #7dd3fc; color:#0c4a6e; border-radius:999px; padding:8px 13px; font-weight:750; text-transform:uppercase; font-size:11px; letter-spacing:.05em; }
+    .pipeline-arrow { color:#64748b; font-weight:900; }
+    .insight-grid { display:grid; grid-template-columns:2fr 1fr; gap:18px; }
+    .insight-panel { background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:18px; }
+    .insight-panel ul { margin:8px 0 0; padding-left:20px; }
+    .importance-list { display:grid; gap:8px; margin-top:12px; }
+    .importance-row { display:grid; grid-template-columns:minmax(120px,1fr) 3fr 62px; gap:10px; align-items:center; }
+    .importance-track { height:10px; background:#e2e8f0; border-radius:999px; overflow:hidden; }
+    .importance-fill { height:100%; background:linear-gradient(90deg,#2563eb,#06b6d4); border-radius:999px; }
     .skip { color:var(--muted); border:1px dashed #94a3b8; padding:20px; border-radius:10px; }
     details { margin-top:8px; } summary { cursor:pointer; color:var(--blue); font-weight:600; }
     footer { text-align:center; color:var(--muted); margin-top:30px; }
+    @media (max-width:760px) { .insight-grid{grid-template-columns:1fr}.pipeline-arrow{display:none} }
     @media print { body{background:#fff} header{padding-top:20px} main{width:100%;margin:0} section{box-shadow:none;break-inside:avoid} }
   </style>
   {{ charts.plotly_js|safe }}
@@ -71,6 +82,20 @@
     <div class="meta">
       <span><strong>Source:</strong> {{ source.path }}</span><span><strong>Loaded as:</strong> {{ source.load_mode }}</span>
       <span><strong>Encoding:</strong> {{ source.encoding }}</span><span><strong>Generated:</strong> {{ profile.generated_at }}</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Business insights</h2>
+    <p class="subtitle">A decision-oriented layer connecting data quality, exploration, modeling, and recommended investigation.</p>
+    <div class="pipeline">
+      {% for step in insights.pipeline %}<span class="pipeline-step">{{ step }}</span>{% if not loop.last %}<span class="pipeline-arrow">→</span>{% endif %}{% endfor %}
+    </div>
+    <div class="insight-grid">
+      <div class="insight-panel"><h3>Key findings</h3><ul>{% for item in insights.key_findings %}<li>{{ item }}</li>{% endfor %}</ul></div>
+      <div class="insight-panel"><h3>Modeling</h3><p>{{ insights.modeling }}</p></div>
+      <div class="insight-panel"><h3>Recommended investigation</h3><ul>{% for item in insights.recommendations %}<li>{{ item }}</li>{% endfor %}</ul></div>
+      <div class="insight-panel"><h3>Interpretation boundary</h3><p>{{ insights.note }}</p></div>
     </div>
   </section>
 
@@ -113,13 +138,17 @@
         <div class="card"><div class="label">Problem</div><div class="value" style="font-size:20px">{{ ml.problem_type|title }}</div></div>
         <div class="card"><div class="label">Target</div><div class="value" style="font-size:20px">{{ ml.target }}</div></div>
         <div class="card"><div class="label">Recommended</div><div class="value score" style="font-size:20px">{{ ml.best_model }}</div></div>
+        <div class="card"><div class="label">Validation</div><div class="value" style="font-size:20px">{% if ml.cv_folds %}{{ ml.cv_folds }}-fold CV{% else %}Holdout{% endif %}</div></div>
         {% if ml.balance %}<div class="card"><div class="label">Target balance</div><div class="value" style="font-size:20px">{{ ml.balance.label|title }} · {{ ml.balance.ratio }}:1</div></div>{% endif %}
       </div>
-      <p>{{ ml.target_reason|capitalize }}. {{ ml.sampling_note }} The holdout contains {{ ml.test_rows|comma }} records.</p>
+      <p>{{ ml.target_reason|capitalize }}. {{ ml.sampling_note }} {{ ml.evaluation_note }}</p>
       {% if charts.models %}<div class="wide-chart">{{ charts.models|safe }}</div>{% endif %}
       <div class="table-wrap"><table><thead><tr><th>Model</th><th>{{ ml.primary_metric }}</th><th>Additional metrics</th><th>Fit time</th></tr></thead><tbody>
-        {% for model in ml.models %}<tr><td><strong>{{ model.name }}</strong>{% if model.recommended %} <span class="pill best">Best</span>{% endif %}</td><td>{{ model.primary_score }}</td><td>{% for key,value in model.metrics.items() %}{{ key }}: {{ value }}{% if not loop.last %} · {% endif %}{% endfor %}</td><td>{{ model.seconds }} sec</td></tr>{% endfor %}
+        {% for model in ml.models %}<tr><td><strong>{{ model.name }}</strong>{% if model.recommended %} <span class="pill best">Best</span>{% endif %}</td><td>{{ model.primary_score }}{% if model.primary_std is not none %} ± {{ model.primary_std }}{% endif %}</td><td>{% for key,value in model.metrics.items() %}{{ key }}: {{ value }}{% if not loop.last %} · {% endif %}{% endfor %}</td><td>{{ model.seconds }} sec</td></tr>{% endfor %}
       </tbody></table></div>
+      {% if ml.feature_importance %}<h3>Feature importance</h3><p class="subtitle">{{ ml.importance_method }}. Values are normalized across source variables.</p>
+      {% if charts.feature_importance %}<div class="wide-chart">{{ charts.feature_importance|safe }}</div>{% endif %}
+      <div class="importance-list">{% for item in ml.feature_importance %}<div class="importance-row"><strong>{{ item.name }}</strong><div class="importance-track"><div class="importance-fill" style="width:{{ item.importance * 100 }}%"></div></div><span>{{ '%.3f'|format(item.importance) }}</span></div>{% endfor %}</div>{% endif %}
       <h3>Business recommendation</h3><div class="callout">{{ ml.recommendation }}</div>
       {% if ml.balance %}<details><summary>Target class distribution</summary><ul>{% for name,count,pct in ml.balance.distribution %}<li>{{ name }}: {{ count|comma }} ({{ pct }}%)</li>{% endfor %}</ul></details>{% endif %}
       {% if ml.dropped_features %}<p><strong>Excluded identifier/constant features:</strong> {{ ml.dropped_features|join(', ') }}</p>{% endif %}

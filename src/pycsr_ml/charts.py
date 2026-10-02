@@ -60,7 +60,9 @@ def build_charts(frame: pd.DataFrame, profile: dict, ml_result: Optional[dict] =
     charts["boxplots"] = _summary_boxplots(frame, profile)
     charts["variables"] = _variable_charts(frame, profile)
 
-    numeric = frame.select_dtypes(include=np.number)
+    numeric = frame.select_dtypes(include=np.number).replace([np.inf, -np.inf], np.nan)
+    if len(numeric) > 100_000:
+        numeric = numeric.sample(100_000, random_state=42)
     corr = numeric.corr(numeric_only=True)
     if len(corr.columns) >= 2:
         size = max(450, min(1100, 250 + len(corr.columns) * 30))
@@ -85,6 +87,7 @@ def build_charts(frame: pd.DataFrame, profile: dict, ml_result: Optional[dict] =
         names = [m["name"] for m in scores][::-1]
         values = [m["primary_score"] for m in scores][::-1]
         elapsed = [m["seconds"] for m in scores][::-1]
+        deviations = [m.get("primary_std") or 0 for m in scores][::-1]
         colors = [COLORS[2] if m["recommended"] else "#9AA0A6" for m in scores][::-1]
         figure = go.Figure(go.Bar(
             x=values,
@@ -95,10 +98,9 @@ def build_charts(frame: pd.DataFrame, profile: dict, ml_result: Optional[dict] =
             text=[f"{value:.4f}" for value in values],
             textposition="outside",
             cliponaxis=False,
-            hovertemplate=(
-                "Model: %{y}<br>" + ml_result["primary_metric"]
-                + ": %{x:.4f}<br>Fit time: %{customdata:.3f} sec<extra></extra>"
-            ),
+            error_x={"type": "data", "array": deviations, "visible": any(deviations)},
+            hovertemplate=("Model: %{y}<br>" + ml_result["primary_metric"]
+                + ": %{x:.4f}<br>Fit/evaluation time: %{customdata:.3f} sec<extra></extra>"),
         ))
         figure.update_layout(
             title="Model performance comparison",
@@ -106,6 +108,26 @@ def build_charts(frame: pd.DataFrame, profile: dict, ml_result: Optional[dict] =
             height=max(340, 105 + len(scores) * 65),
         )
         charts["models"] = _chart_html(figure)
+        importance = ml_result.get("feature_importance", [])
+        if importance:
+            names = [item["name"] for item in importance][::-1]
+            values = [item["importance"] for item in importance][::-1]
+            figure = go.Figure(go.Bar(
+                x=values,
+                y=names,
+                orientation="h",
+                marker_color=COLORS[0],
+                text=[f"{value:.3f}" for value in values],
+                textposition="outside",
+                cliponaxis=False,
+                hovertemplate="Feature: %{y}<br>Normalized importance: %{x:.4f}<extra></extra>",
+            ))
+            figure.update_layout(
+                title="Feature importance",
+                xaxis_title="Normalized importance",
+                height=max(340, 130 + len(names) * 36),
+            )
+            charts["feature_importance"] = _chart_html(figure)
     return charts
 
 
@@ -168,7 +190,7 @@ def _variable_charts(frame: pd.DataFrame, profile: dict) -> list[dict]:
 
 
 def _numeric_chart(series: pd.Series, item: dict, name: str, color: str) -> go.Figure:
-    values = pd.to_numeric(series, errors="coerce").dropna()
+    values = pd.to_numeric(series, errors="coerce").replace([np.inf, -np.inf], np.nan).dropna()
     if values.empty:
         return _empty_figure(name, "No numeric values available")
     if item["kind"] == "numeric discrete":
@@ -247,7 +269,7 @@ def _summary_boxplots(frame: pd.DataFrame, profile: dict) -> dict[str, str]:
         item = profiles[name]
         if not item["kind"].startswith("numeric"):
             continue
-        values = pd.to_numeric(frame[name], errors="coerce").dropna()
+        values = pd.to_numeric(frame[name], errors="coerce").replace([np.inf, -np.inf], np.nan).dropna()
         if values.empty:
             continue
         stats = item["stats"]
@@ -256,10 +278,12 @@ def _summary_boxplots(frame: pd.DataFrame, profile: dict) -> dict[str, str]:
         color = COLORS[index % len(COLORS)]
         figure = go.Figure()
         figure.add_trace(go.Box(
-            x=values,
-            y=["Distribution"] * len(values),
+            q1=[stats["q1"]],
+            median=[stats["median"]],
+            q3=[stats["q3"]],
+            lowerfence=[stats["min"]],
+            upperfence=[stats["max"]],
             orientation="h",
-            boxpoints=False,
             fillcolor=color,
             line={"color": color, "width": 2},
             opacity=0.65,

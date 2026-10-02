@@ -13,7 +13,9 @@ The report runs locally and embeds all charts directly in the HTML. No dataset i
 - Produces categorical/text summaries including cardinality, common values, frequency, and text lengths.
 - Embeds interactive, hover-enabled missingness, per-variable distribution, correlation, and model-comparison charts with a Seaborn-inspired visual style and always-visible value labels.
 - Detects classification versus regression and target class imbalance.
-- Benchmarks linear and tree-based models using a reproducible holdout set.
+- Benchmarks linear and tree-based models using a reproducible holdout or optional 2-20 fold cross-validation.
+- Reports validation uncertainty as mean ± standard deviation and explains the best model with normalized feature importance.
+- Generates an evidence-based Business Insights layer with key findings and recommended investigation.
 - Escapes source values and creates a portable, offline HTML file.
 - Offers both a CLI and Python API.
 
@@ -28,7 +30,7 @@ python -m pip install pycsr-business-analytics-report
 ### From a local wheel
 
 ```bash
-python -m pip install dist/pycsr_business_analytics_report-0.1.5-py3-none-any.whl
+python -m pip install dist/pycsr_business_analytics_report-1.0.5-py3-none-any.whl
 ```
 
 ### For development
@@ -104,29 +106,37 @@ The lowercase alias also works:
 pycsr-ml --input test.csv
 ```
 
+The input path can also be positional. Enable five-fold cross-validation with:
+
+```bash
+pycsr-ml data.csv --target churn --cv 5
+```
+
 ## CLI reference
 
 ```text
-usage: PyCSR_ML [-h] --input INPUT [--output OUTPUT] [--target TARGET]
+usage: PyCSR_ML [-h] [--input INPUT] [--output OUTPUT] [--target TARGET]
                 [--no-ml] [--max-model-rows MAX_MODEL_ROWS]
-                [--random-state RANDOM_STATE] [--version]
+                [--random-state RANDOM_STATE] [--cv FOLDS] [--version]
+                [input_path]
 ```
 
 | Option | Meaning |
 |---|---|
-| `--input`, `-i` | Required path to a `.csv` or `.txt` file. |
+| `input_path` or `--input`, `-i` | Required path to a `.csv` or `.txt` file. Use either form, not both. |
 | `--output`, `-o` | HTML destination. Defaults to `<input_stem>_PyCSR_ML_report.html`. |
 | `--target`, `-t` | Column the ML stage should predict. Recommended for unambiguous analysis. |
 | `--no-ml` | Skip model training while retaining the complete profiling report. |
 | `--max-model-rows` | Reproducible sample cap for model comparison; default `20000`. Profiling still covers the full file. |
 | `--random-state` | Seed used for splitting, sampling, and tree models; default `42`. |
+| `--cv FOLDS` | Use cross-validation with 2-20 folds. Without it, the default is a 75/25 holdout. |
 | `--version` | Print the installed version. |
 
 Run `PyCSR_ML --help` for the installed command help.
 
 ## How input detection works
 
-For CSV data, PyCSR_ML detects common delimiters (comma, tab, semicolon, or pipe) and attempts UTF-8, Windows-1252, then Latin-1 decoding. A delimited `.txt` file is loaded as a table. A plain `.txt` file becomes a single `text` column with one non-empty line per row.
+For CSV data, PyCSR_ML detects common delimiters (comma, tab, semicolon, or pipe) and attempts UTF-8, Windows-1252, then Latin-1 decoding. A delimited `.txt` file is loaded as a table. A plain `.txt` file becomes a single `text` column with one non-empty line per row. Rows with an invalid field count are skipped rather than terminating the full report; this policy is recorded in ingestion metadata.
 
 This initial version intentionally supports only `.csv` and `.txt`. JSON, Parquet, Excel, images, audio, and arbitrary binary “unstructured” content are not yet supported.
 
@@ -139,6 +149,7 @@ This initial version intentionally supports only `.csv` and `.txt`. JSON, Parque
 - Duplicate records
 - Semantic column classification: continuous numeric, discrete numeric, categorical, text, datetime, boolean, or empty
 - Potential identifier and constant-column warnings
+- Infinite numeric-value detection; infinities are treated as missing during modeling
 - Quality score based on missingness, duplicates, and constant columns
 - A hover-enabled distribution plot for every numeric, categorical, text, datetime, and boolean variable
 - Compact horizontal box plots with visible min, Q1, median, Q3, and max values in the Key statistics column
@@ -183,6 +194,7 @@ Each tree ensemble currently uses 160 estimators. Classification models use bala
 - Numeric predictors receive median imputation followed by standard scaling.
 - Categorical, boolean, date-like, and text predictors receive most-frequent imputation and one-hot encoding.
 - Categories observed only once are grouped by the encoder where supported, and unseen test categories are ignored safely.
+- Encoded categoricals are capped at 100 output categories per source variable to bound high-cardinality inputs.
 - Constant columns are excluded.
 - Columns whose non-missing values are at least 98% unique are treated as likely identifiers and excluded.
 - For modeling only, datasets larger than `--max-model-rows` are reproducibly sampled. Full-file profiling still uses every row.
@@ -191,14 +203,27 @@ The current text support is a tabular baseline, not a specialized NLP pipeline. 
 
 #### Evaluation and recommendation rules
 
-PyCSR_ML uses a reproducible 75/25 train/test holdout. Classification splits are stratified when every class has enough examples.
+Without `--cv`, PyCSR_ML uses a reproducible 75/25 train/test holdout. With `--cv FOLDS`, it uses shuffled stratified folds for classification and shuffled K-fold validation for regression. Every classification class must contain at least as many records as the requested fold count.
 
 - Classification reports balanced accuracy, accuracy, and weighted F1. The recommended classifier is the one with the highest balanced accuracy.
 - Regression reports R2, RMSE, and MAE. The recommended regressor is the one with the highest R2.
 - Training duration is reported for every successful model.
 - One model failure does not stop the remaining comparisons; failures are recorded in the result.
+- Cross-validation reports the primary metric as mean ± one standard deviation across folds and retains the individual fold scores in the result object.
 
 Balanced accuracy is the primary classification metric because plain accuracy can be misleading when one class dominates. RMSE and MAE remain important for regression because R2 alone does not express error in the target's original units.
+
+#### Explainability and Business Insights
+
+After ranking the models, PyCSR_ML fits the recommended baseline on the modeling data and calculates source-column importance. Tree models use their native feature importance; linear models use absolute standardized coefficients. One-hot encoded values are aggregated back to their original source columns, normalized, and displayed as an interactive horizontal chart and ranked list.
+
+The Business Insights layer connects the report stages:
+
+```text
+DATA → QUALITY CHECK → EDA → ML → INSIGHT ENGINE → BUSINESS REPORT
+```
+
+It summarizes measurable quality risks, target relationships, the strongest baseline, leading predictive features, and recommended investigation. Statements use observed rates, means, correlations, or normalized importance. They describe association rather than causation and should be validated with domain review and controlled experiments.
 
 #### When ML is skipped
 
@@ -214,7 +239,7 @@ The report still completes its profiling sections when modeling is unsafe or not
 
 If an explicit `--target` name does not exist, the CLI exits with a clear input error and lists the available columns instead of generating a misleading report.
 
-Modeling runs automatically in an isolated background worker after profiling. The CLI waits for that worker so it can deliver one complete report rather than a partially updated file. Results are baseline comparisons, not production certification. Before deployment, perform cross-validation, hyperparameter tuning, leakage review, fairness analysis, probability calibration where relevant, temporal validation for time-dependent data, and validation against business cost.
+Modeling runs automatically in an isolated background worker after profiling. The CLI waits for that worker so it can deliver one complete report rather than a partially updated file. Results are baseline comparisons, not production certification. Before deployment, use an untouched final test set, hyperparameter tuning, leakage review, fairness analysis, probability calibration where relevant, temporal validation for time-dependent data, and validation against business cost.
 
 ## Python API
 
@@ -226,6 +251,7 @@ report_path = generate_report(
     output_path="reports/customers.html",
     target="churn",
     random_state=42,
+    cv=5,
 )
 print(report_path)
 ```
@@ -250,6 +276,7 @@ PyCSR_ML/
 |   |-- charts.py                # Interactive chart generation
 |   |-- cli.py                   # CLI parser and error handling
 |   |-- io.py                    # CSV/TXT detection and loading
+|   |-- insights.py              # Evidence-based business narrative generation
 |   |-- modeling.py              # Target inference and model benchmarking
 |   |-- profiling.py             # Statistical and quality analysis
 |   `-- reporting.py             # Jinja report rendering
@@ -272,6 +299,22 @@ python -m pytest
 python -m build
 ```
 
+### Resilience test suite
+
+Testing is a flagship capability. The suite generates difficult fixtures at runtime and covers:
+
+- zero-byte and header-only CSV files;
+- single-column and all-missing datasets;
+- duplicate headers and Unicode values;
+- one million rows without committing a giant fixture;
+- mixed date formats and pipe-delimited text;
+- malformed rows;
+- imbalanced and constant targets;
+- 1,000 categorical levels; and
+- positive/negative infinity in numeric features.
+
+Run the complete suite, including the million-row test, with `python -m pytest`. Run only the faster tests with `python -m pytest -m "not slow"`.
+
 Artifacts are created in `dist/`. Check them before release:
 
 ```bash
@@ -283,8 +326,8 @@ Test the exact wheel in a clean environment before publishing:
 
 ```bash
 python -m venv wheel-test
-wheel-test\Scripts\python -m pip install dist/pycsr_business_analytics_report-0.1.5-py3-none-any.whl
-wheel-test\Scripts\PyCSR_ML --input examples/customer_churn.csv --target churn
+wheel-test\Scripts\python -m pip install dist/pycsr_business_analytics_report-1.0.5-py3-none-any.whl
+wheel-test\Scripts\PyCSR_ML --input examples/reference_data/customer_churn.csv --target churn --cv 5
 ```
 
 ## Publish to PyPI
@@ -298,46 +341,46 @@ For every release, update the version in both of these files:
 ```toml
 # pyproject.toml
 [project]
-version = "0.1.5"
+version = "1.0.5"
 ```
 
 ```python
 # src/pycsr_ml/__init__.py
-__version__ = "0.1.5"
+__version__ = "1.0.5"
 ```
 
 Commit and push the version change **before creating the tag**:
 
 ```bash
 git add pyproject.toml src/pycsr_ml/__init__.py README.md
-git commit -m "Prepare release 0.1.5"
+git commit -m "Prepare release 1.0.5"
 git push origin main
 ```
 
 Create the tag only after the version commit is on `main`, then push it:
 
 ```bash
-git tag -a v0.1.5 -m "Release v0.1.5"
-git push origin v0.1.5
+git tag -a v1.0.5 -m "Release v1.0.5"
+git push origin v1.0.5
 ```
 
 Verify that the tag contains the intended versions before publishing:
 
 ```powershell
-git show v0.1.5:pyproject.toml | Select-String 'version ='
-git show v0.1.5:src/pycsr_ml/__init__.py | Select-String '__version__'
+git show v1.0.5:pyproject.toml | Select-String 'version ='
+git show v1.0.5:src/pycsr_ml/__init__.py | Select-String '__version__'
 ```
 
-Both commands must report `0.1.5`. On GitHub, create a release using the existing `v0.1.5` tag and click **Publish release**. Publishing the release triggers `.github/workflows/workflow.yml`, which builds, validates, and uploads the wheel and source distribution through Trusted Publishing.
+Both commands must report `1.0.5`. On GitHub, create a release using the existing `v1.0.5` tag and click **Publish release**. Publishing the release triggers `.github/workflows/workflow.yml`, which builds, validates, and uploads the wheel and source distribution through Trusted Publishing.
 
 The expected artifacts are:
 
 ```text
-pycsr_business_analytics_report-0.1.5-py3-none-any.whl
-pycsr_business_analytics_report-0.1.5.tar.gz
+pycsr_business_analytics_report-1.0.5-py3-none-any.whl
+pycsr_business_analytics_report-1.0.5.tar.gz
 ```
 
-Do not use **Re-run jobs** for a workflow associated with an incorrectly placed tag; a rerun uses the same old commit. Correct or recreate the GitHub tag first, then start a new workflow run. PyPI does not permit replacing or reusing files from an already-published version.
+Do not use **Re-run jobs** for a workflow associated with an incorrectly placed tag; a rerun uses the same old commit. Correct or recreate the GitHub tag first, then start a new workflow run. The workflow now verifies that the release tag matches `pyproject.toml` before building, and publishing cannot begin unless the full test suite passes. PyPI does not permit replacing or reusing files from an already-published version.
 
 ### Configure PyPI Trusted Publishing
 

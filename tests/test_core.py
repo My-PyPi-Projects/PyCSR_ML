@@ -1,9 +1,9 @@
-from pathlib import Path
 
 import pandas as pd
 
 from pycsr_ml.api import generate_report
 from pycsr_ml.charts import build_charts
+from pycsr_ml.cli import build_parser
 from pycsr_ml.io import load_dataset
 from pycsr_ml.modeling import compare_models
 from pycsr_ml.profiling import profile_dataset
@@ -44,6 +44,21 @@ def test_classification_comparison():
     assert len(result["models"]) >= 2
 
 
+def test_cross_validation_and_feature_importance():
+    result = compare_models(sample_frame(120), "churn", cv=5)
+    assert result["status"] == "complete"
+    assert result["cv_folds"] == 5
+    assert all(model["primary_std"] is not None for model in result["models"])
+    assert all(len(model["fold_scores"]) == 5 for model in result["models"])
+    assert result["feature_importance"]
+
+
+def test_cli_accepts_positional_input_and_cv():
+    args = build_parser().parse_args(["data.csv", "--target", "churn", "--cv", "5"])
+    assert args.input_path == "data.csv"
+    assert args.cv == 5
+
+
 def test_classification_with_missing_categorical_values():
     frame = sample_frame()
     frame.loc[[2, 7, 15], "region"] = None
@@ -62,6 +77,18 @@ def test_generate_report_without_ml(tmp_path):
     assert "Executive overview" in html
     assert "hovertemplate" in html
     assert "plotly.js" in html.lower()
+
+
+def test_report_contains_business_insights_and_cv(tmp_path):
+    source = tmp_path / "customers.csv"
+    output = tmp_path / "report.html"
+    sample_frame(120).to_csv(source, index=False)
+    generate_report(source, output, target="churn", cv=3)
+    html = output.read_text(encoding="utf-8")
+    assert "Business insights" in html
+    assert "3-fold CV" in html
+    assert "Feature importance" in html
+    assert "±" in html
 
 
 def test_every_variable_has_an_interactive_chart():

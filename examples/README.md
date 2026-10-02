@@ -1,6 +1,6 @@
 # PyCSR_ML reference examples
 
-This gallery exercises the supported CSV and TXT ingestion paths, mixed data types, data-quality diagnostics, classification, regression, target imbalance, text fields, and intentional ML skipping.
+This gallery exercises the supported CSV and TXT ingestion paths, mixed data types, data-quality diagnostics, classification, regression, target imbalance, text fields, cross-validation, feature importance, Business Insights, and intentional ML skipping.
 
 After generation, open [`reference_reports/index.html`](reference_reports/index.html) to browse the gallery.
 
@@ -26,7 +26,7 @@ The tiny churn dataset intentionally has fewer than 30 rows, so its report demon
 Install PyCSR_ML in the current environment and run:
 
 ```powershell
-python examples/generate_reference_examples.py
+python examples/generate_reference_examples.py --cv 5
 ```
 
 Generate only the source datasets:
@@ -42,6 +42,7 @@ All synthetic datasets use a fixed random seed. Repeated runs therefore reproduc
 ```powershell
 PyCSR_ML --input examples/reference_data/employee_attrition.csv `
   --target attrition `
+  --cv 5 `
   --output examples/reference_reports/employee_attrition_report.html
 ```
 

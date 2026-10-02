@@ -14,7 +14,6 @@ from sklearn.datasets import load_breast_cancer
 
 from pycsr_ml import generate_report
 
-
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "reference_data"
 REPORT_DIR = ROOT / "reference_reports"
@@ -339,14 +338,20 @@ def generate_data() -> None:
     (DATA_DIR / "customer_feedback.txt").write_text("\n".join(feedback_lines()) + "\n", encoding="utf-8")
 
 
-def generate_reports() -> list[dict]:
+def generate_reports(cv: int = 5) -> list[dict]:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     results = []
     for example in EXAMPLES:
         source = DATA_DIR / example.filename
         destination = REPORT_DIR / example.report_name
         print(f"Generating {example.title}: {destination.name}")
-        generate_report(source, destination, target=example.target, run_ml=example.run_ml)
+        generate_report(
+            source,
+            destination,
+            target=example.target,
+            run_ml=example.run_ml,
+            cv=cv if example.run_ml else None,
+        )
         results.append({
             "example": example,
             "rows": _row_count(source),
@@ -381,11 +386,12 @@ def _write_index(results: list[dict]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-only", action="store_true", help="Generate datasets without HTML reports")
+    parser.add_argument("--cv", type=int, default=5, help="Cross-validation folds for ML examples")
     args = parser.parse_args()
     generate_data()
     print(f"Generated {len(EXAMPLES)} datasets in {DATA_DIR}")
     if not args.data_only:
-        results = generate_reports()
+        results = generate_reports(cv=args.cv)
         print(f"Generated {len(results)} reports and {REPORT_DIR / 'index.html'}")
 
 

@@ -2,15 +2,17 @@
 
 from __future__ import annotations
 
+import warnings
 from datetime import datetime, timezone
 from typing import Any
-import warnings
 
 import numpy as np
 import pandas as pd
 
 
 def _kind(series: pd.Series) -> str:
+    if series.notna().sum() == 0:
+        return "empty"
     if pd.api.types.is_bool_dtype(series):
         return "boolean"
     if pd.api.types.is_numeric_dtype(series):
@@ -21,9 +23,13 @@ def _kind(series: pd.Series) -> str:
     values = series.dropna().astype(str)
     if values.empty:
         return "empty"
+    date_sample = values.head(500)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", UserWarning)
-        parsed = pd.to_datetime(values, errors="coerce")
+        try:
+            parsed = pd.to_datetime(date_sample, errors="coerce", format="mixed")
+        except (TypeError, ValueError):  # pandas 1.x compatibility
+            parsed = date_sample.map(lambda value: pd.to_datetime(value, errors="coerce"))
     if parsed.notna().mean() >= 0.9:
         return "datetime"
     avg_length = values.str.len().mean()
@@ -50,6 +56,8 @@ def profile_dataset(frame: pd.DataFrame) -> dict:
     duplicate_rows = int(frame.duplicated().sum())
     total_cells = max(rows * columns, 1)
     missing_cells = int(frame.isna().sum().sum())
+    numeric_frame = frame.select_dtypes(include=np.number)
+    infinite_cells = int(np.isinf(numeric_frame.to_numpy()).sum()) if not numeric_frame.empty else 0
     column_profiles = []
 
     for name in frame.columns:
@@ -62,22 +70,25 @@ def profile_dataset(frame: pd.DataFrame) -> dict:
             "dtype": str(series.dtype),
             "non_null": int(series.notna().sum()),
             "missing": int(series.isna().sum()),
-            "missing_pct": round(series.isna().mean() * 100, 2),
+            "missing_pct": round(series.isna().mean() * 100, 2) if rows else 0.0,
             "unique": int(series.nunique(dropna=True)),
             "stats": {},
         }
         if kind.startswith("numeric") and not non_null.empty:
-            numeric = pd.to_numeric(non_null, errors="coerce").dropna()
+            converted = pd.to_numeric(non_null, errors="coerce")
+            infinite = int(np.isinf(converted.to_numpy()).sum())
+            numeric = converted.replace([np.inf, -np.inf], np.nan).dropna()
             item["stats"] = {
-                "min": _safe(numeric.min()),
-                "q1": _safe(numeric.quantile(0.25)),
-                "median": _safe(numeric.median()),
-                "mean": _safe(numeric.mean()),
-                "q3": _safe(numeric.quantile(0.75)),
-                "max": _safe(numeric.max()),
-                "std": _safe(numeric.std()),
+                "min": _safe(numeric.min()) if not numeric.empty else None,
+                "q1": _safe(numeric.quantile(0.25)) if not numeric.empty else None,
+                "median": _safe(numeric.median()) if not numeric.empty else None,
+                "mean": _safe(numeric.mean()) if not numeric.empty else None,
+                "q3": _safe(numeric.quantile(0.75)) if not numeric.empty else None,
+                "max": _safe(numeric.max()) if not numeric.empty else None,
+                "std": _safe(numeric.std()) if not numeric.empty else None,
                 "zeros": int((numeric == 0).sum()),
-                "skew": _safe(numeric.skew()),
+                "skew": _safe(numeric.skew()) if len(numeric) >= 3 else None,
+                "infinite": infinite,
             }
         elif not non_null.empty:
             as_text = non_null.astype(str)
@@ -108,6 +119,7 @@ def profile_dataset(frame: pd.DataFrame) -> dict:
         "non_numeric_columns": columns - numeric_count,
         "missing_cells": missing_cells,
         "missing_pct": round(missing_cells / total_cells * 100, 2),
+        "infinite_cells": infinite_cells,
         "duplicate_rows": duplicate_rows,
         "duplicate_pct": round(duplicate_rows / max(rows, 1) * 100, 2),
         "memory_mb": round(frame.memory_usage(deep=True).sum() / 1024**2, 3),
@@ -135,6 +147,13 @@ def _quality_findings(frame: pd.DataFrame, profiles: list[dict]) -> list[dict]:
         findings.append({"level": "info", "title": "Possible identifiers", "text": _names(possible_ids)})
     if frame.duplicated().any():
         findings.append({"level": "warn", "title": "Duplicate records", "text": f"{int(frame.duplicated().sum()):,} rows repeat an earlier row."})
+    infinite = sum(p.get("stats", {}).get("infinite", 0) for p in profiles)
+    if infinite:
+        findings.append({
+            "level": "risk",
+            "title": "Infinite numeric values",
+            "text": f"{infinite:,} values are positive or negative infinity and will be treated as missing for modeling.",
+        })
     if not findings:
         findings.append({"level": "good", "title": "No major structural issues", "text": "No high-missing, constant, or duplicate-data warning was detected."})
     return findings
