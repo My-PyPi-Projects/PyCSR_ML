@@ -40,10 +40,10 @@ PyCSR_ML = "pycsr_ml.cli:main"
 pycsr-ml = "pycsr_ml.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/MyMLOpsProjects/PyCSR_ML"
-Documentation = "https://github.com/MyMLOpsProjects/PyCSR_ML#readme"
-Issues = "https://github.com/MyMLOpsProjects/PyCSR_ML/issues"
-Source = "https://github.com/MyMLOpsProjects/PyCSR_ML"
+Homepage = "https://github.com/My-PyPi-Projects/PyCSR_ML"
+Documentation = "https://github.com/My-PyPi-Projects/PyCSR_ML#readme"
+Issues = "https://github.com/My-PyPi-Projects/PyCSR_ML/issues"
+Source = "https://github.com/My-PyPi-Projects/PyCSR_ML"
 
 
 [tool.setuptools]

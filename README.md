@@ -254,6 +254,7 @@ PyCSR_ML/
 |   |-- profiling.py             # Statistical and quality analysis
 |   `-- reporting.py             # Jinja report rendering
 |-- tests/                       # Core behavior tests
+|-- .github/workflows/workflow.yml # Trusted Publishing workflow
 |-- requirements.txt             # Runtime dependency ranges
 |-- LICENSE
 |-- MANIFEST.in
@@ -289,20 +290,31 @@ wheel-test\Scripts\PyCSR_ML --input examples/customer_churn.csv --target churn
 ## Publish to PyPI
 
 1. The PyPI distribution name is `pycsr-business-analytics-report`. Python imports remain `pycsr_ml`, and the primary command remains `PyCSR_ML`.
-2. Replace the placeholder repository URLs and author information in `pyproject.toml`.
-3. Increment the version for each release.
-4. Create a PyPI account, enable two-factor authentication, and create a scoped API token.
-5. Upload to TestPyPI first, verify installation, then publish to production PyPI.
+2. Increment the version in `pyproject.toml` for each release. PyPI does not permit replacing files for a version that has already been uploaded.
+3. Commit and push the version change to `https://github.com/My-PyPi-Projects/PyCSR_ML`.
+4. Create a GitHub release, or manually run the **Publish package to PyPI** workflow from the repository's **Actions** tab.
 
-```bash
-python -m twine upload --repository testpypi dist/*
-# after testing
-python -m twine upload dist/*
-```
+### Configure PyPI Trusted Publishing
 
-Use `__token__` as the username and your API token as the password, or configure a trusted publisher in PyPI. Never commit tokens to the repository.
+The workflow at `.github/workflows/workflow.yml` uses OpenID Connect (OIDC), so no PyPI API token or GitHub secret is required.
 
-Publishing is intentionally not automatic: it requires the package owner's identity, final metadata, a unique project name, and PyPI credentials.
+For an existing PyPI project, open the project's **Manage** page, select **Publishing**, and add a GitHub Actions trusted publisher with these exact values:
+
+| PyPI field | Value |
+|---|---|
+| PyPI project | `pycsr-business-analytics-report` |
+| GitHub owner | `My-PyPi-Projects` |
+| Repository | `PyCSR_ML` |
+| Workflow filename | `workflow.yml` |
+| Environment name | `pypi` |
+
+If the PyPI project has not been created yet, add a **pending publisher** from the PyPI publishing settings using the same values and the project name `pycsr-business-analytics-report`. The first successful workflow run will create the project.
+
+In the GitHub repository, open **Settings > Environments**, create an environment named `pypi`, and optionally add required reviewers. The name is case-sensitive and must match the PyPI publisher configuration and workflow.
+
+The workflow runs automatically when a GitHub release is published. It can also be started with **Actions > Publish package to PyPI > Run workflow**. The build and publish stages are deliberately separate, and only the publish job receives the `id-token: write` permission.
+
+Do not add a username, password, API token, or `PYPI_API_TOKEN` secret to this workflow; doing so disables the Trusted Publishing authentication path.
 
 ## Privacy and operational notes
 
