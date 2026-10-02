@@ -4,7 +4,6 @@ PyCSR_ML turns a CSV or text file into a polished, self-contained HTML business 
 
 The report runs locally and embeds all charts directly in the HTML. No dataset is uploaded and no report server is required.
 
-
 ## Highlights
 
 - Loads `.csv` and `.txt` files with delimiter and encoding detection.
@@ -29,7 +28,7 @@ python -m pip install pycsr-business-analytics-report
 ### From a local wheel
 
 ```bash
-python -m pip install dist/pycsr_business_analytics_report-0.1.3-py3-none-any.whl
+python -m pip install dist/pycsr_business_analytics_report-0.1.5-py3-none-any.whl
 ```
 
 ### For development
@@ -284,16 +283,61 @@ Test the exact wheel in a clean environment before publishing:
 
 ```bash
 python -m venv wheel-test
-wheel-test\Scripts\python -m pip install dist/pycsr_business_analytics_report-0.1.3-py3-none-any.whl
+wheel-test\Scripts\python -m pip install dist/pycsr_business_analytics_report-0.1.5-py3-none-any.whl
 wheel-test\Scripts\PyCSR_ML --input examples/customer_churn.csv --target churn
 ```
 
 ## Publish to PyPI
 
-1. The PyPI distribution name is `pycsr-business-analytics-report`. Python imports remain `pycsr_ml`, and the primary command remains `PyCSR_ML`.
-2. Increment the version in `pyproject.toml` for each release. PyPI does not permit replacing files for a version that has already been uploaded.
-3. Commit and push the version change to `https://github.com/My-PyPi-Projects/PyCSR_ML`.
-4. Create a GitHub release, or manually run the **Publish package to PyPI** workflow from the repository's **Actions** tab.
+The PyPI distribution name is `pycsr-business-analytics-report`. Python imports remain `pycsr_ml`, and the primary command remains `PyCSR_ML`.
+
+### Release checklist
+
+For every release, update the version in both of these files:
+
+```toml
+# pyproject.toml
+[project]
+version = "0.1.5"
+```
+
+```python
+# src/pycsr_ml/__init__.py
+__version__ = "0.1.5"
+```
+
+Commit and push the version change **before creating the tag**:
+
+```bash
+git add pyproject.toml src/pycsr_ml/__init__.py README.md
+git commit -m "Prepare release 0.1.5"
+git push origin main
+```
+
+Create the tag only after the version commit is on `main`, then push it:
+
+```bash
+git tag -a v0.1.5 -m "Release v0.1.5"
+git push origin v0.1.5
+```
+
+Verify that the tag contains the intended versions before publishing:
+
+```powershell
+git show v0.1.5:pyproject.toml | Select-String 'version ='
+git show v0.1.5:src/pycsr_ml/__init__.py | Select-String '__version__'
+```
+
+Both commands must report `0.1.5`. On GitHub, create a release using the existing `v0.1.5` tag and click **Publish release**. Publishing the release triggers `.github/workflows/workflow.yml`, which builds, validates, and uploads the wheel and source distribution through Trusted Publishing.
+
+The expected artifacts are:
+
+```text
+pycsr_business_analytics_report-0.1.5-py3-none-any.whl
+pycsr_business_analytics_report-0.1.5.tar.gz
+```
+
+Do not use **Re-run jobs** for a workflow associated with an incorrectly placed tag; a rerun uses the same old commit. Correct or recreate the GitHub tag first, then start a new workflow run. PyPI does not permit replacing or reusing files from an already-published version.
 
 ### Configure PyPI Trusted Publishing
 
